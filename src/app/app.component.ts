@@ -32,8 +32,4 @@ export class AppComponent implements OnInit {
     fetchData(): Observable<ContentData[]> {
         return this.http.get<ContentData[]>('/assets/data.json');
     }
-
-    scenario_cliked(scenario: ContentData): void {
-        this.selected_scenario = scenario;
-    }
 }

@@ -10,7 +10,7 @@ export type Situation = {
 };
 
 export type ContentBlock = {
-    type?: "text" | "image";
+    type: "text" | "image";
     text?: TextBlock; // Texte d'un pavé (facultatif)
     image?: ImageBlock; // Image associée à ce pavé (facultative)
 };
