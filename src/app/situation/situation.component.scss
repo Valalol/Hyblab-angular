@@ -4,6 +4,7 @@ p {
 
 .choice {
     // make some sort of nice looking card looking button for a choice button
+    flex:1; //make buttons same size
     border: 1px solid white;
     color: white;
     padding: 15px;
@@ -18,6 +19,11 @@ p {
         background-color: lighten(black, 20%);
     }
 }
+
 #choice_div {
     display: flex;
+}
+
+.selected {
+    background-color: lighten(black, 25%);
 }
