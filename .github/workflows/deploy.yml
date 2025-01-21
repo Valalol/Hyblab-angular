@@ -24,13 +24,14 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    # Step 4: Install Angular CLI
-    - name: Install Angular CLI
-      run: npm install -g @angular/cli
-
-    # Step 5: Build the project
+    # Step 4: Build the project
     - name: Build Angular project
       run: ng build --base-href=/lequipe/
+
+    # Step 5: Extract last commit message
+    - name: Get last commit message
+      id: get-commit-message
+      run: echo "commit_message=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
 
     # Step 6: Clone the target repository
     - name: Clone target repository
@@ -40,8 +41,8 @@ jobs:
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
 
-    # Step 7: Clean the target directory
-    - name: Clean target directory
+    # Step 7: Clean the target directory for build files
+    - name: Clean target public directory
       run: |
         rm -rf target-repo/lequipe/public/*
 
@@ -50,13 +51,23 @@ jobs:
       run: |
         cp -R ./dist/hyblab-angular/browser/* target-repo/lequipe/public/
 
-    # Step 9: Commit and push changes
+    # Step 9: Clean the target src directory
+    - name: Clean target src directory
+      run: |
+        rm -rf target-repo/lequipe/src/*
+
+    # Step 10: Copy source files to src/ in target repository (exclude specific files)
+    - name: Copy source files
+      run: |
+        rsync -av --progress ./ target-repo/lequipe/src/ --exclude=node_modules --exclude=dist --exclude=.git --exclude=.github --exclude=.angular
+
+    # Step 11: Commit and push changes
     - name: Commit and push changes
       run: |
         cd target-repo
         if [ -n "$(git status --porcelain)" ]; then
           git add .
-          git commit -m "Update deployment from pipeline"
+          git commit -m "${{ env.commit_message }}"
           git push
         else
           echo "No changes to commit."
