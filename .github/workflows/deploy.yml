@@ -1,0 +1,56 @@
+name: Build and Deploy Angular Project
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the source code
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18 # Use the Node.js version compatible with Angular
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: npm ci
+
+    # Step 4: Build the project
+    - name: Build Angular project
+      run: ng build --base-href=/lequipe/
+
+    # Step 5: Clone the target repository
+    - name: Clone target repository
+      run: |
+        git clone https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/Valalol/Hyblab2025.git target-repo
+        cd target-repo
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+
+    # Step 6: Clean the target directory
+    - name: Clean target directory
+      run: |
+        cd target-repo/lequipe/public/
+        rm -rf target-repo/lequipe/public/*
+
+    # Step 7: Copy build output to target repository
+    - name: Copy build output
+      run: |
+        cp -R ./dist/hyblab-angular/browser/* target-repo/lequipe/public/
+
+    # Step 8: Push changes to the target repository
+    - name: Commit and push changes
+      run: |
+        cd target-repo
+        git add .
+        git commit -m "Update deployment from pipeline"
+        git push

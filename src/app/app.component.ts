@@ -30,6 +30,6 @@ export class AppComponent implements OnInit {
     }
 
     fetchData(): Observable<ContentData[]> {
-        return this.http.get<ContentData[]>('/assets/data.json');
+        return this.http.get<ContentData[]>('assets/data.json');
     }
 }
