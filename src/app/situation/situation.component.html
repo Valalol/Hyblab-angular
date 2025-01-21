@@ -8,9 +8,11 @@
         }
     }
 }
+<div id="choice_div">
 @for (item of situation.choices; track $index) {
     <p (click)="selected_choice = item" class="choice"> {{item.text}} </p>
 }
+</div>
 @if (selected_choice) {
     <app-situation [situation]="selected_choice.result"></app-situation>
 }
