@@ -63,7 +63,7 @@ jobs:
     # Copy source files to src/ in target repository (exclude specific files)
     - name: Copy source files
       run: |
-        rsync -av --progress ./ target-repo/lequipe/src/ --exclude=node_modules --exclude=dist --exclude=.git --exclude=.github --exclude=.angular
+        rsync -av --progress ./ target-repo/lequipe/src/ --exclude=node_modules --exclude=dist --exclude=.git --exclude=.github --exclude=.angular --exclude=target-repo
 
     # Commit and push changes
     - name: Commit and push changes
