@@ -1,0 +1,78 @@
+name: Build and Deploy Angular Project
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the source code
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    # Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18 # Use the Node.js version compatible with Angular
+
+    # Install dependencies
+    - name: Install dependencies
+      run: npm ci
+
+    # Install Angular CLI
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+
+    # Build the project
+    - name: Build Angular project
+      run: ng build --base-href=/lequipe/
+
+    # Extract last commit message
+    - name: Get last commit message
+      id: get-commit-message
+      run: echo "commit_message=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+
+    # Clone the target repository
+    - name: Clone target repository
+      run: |
+        git clone https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/Valalol/Hyblab2025.git target-repo
+        cd target-repo
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+
+    # Clean the target directory for build files
+    - name: Clean target public directory
+      run: |
+        rm -rf target-repo/lequipe/public/*
+
+    # Copy build output to target repository
+    - name: Copy build output
+      run: |
+        cp -R ./dist/hyblab-angular/browser/* target-repo/lequipe/public/
+
+    # Clean the target src directory
+    - name: Clean target src directory
+      run: |
+        rm -rf target-repo/lequipe/src/*
+
+    # Copy source files to src/ in target repository (exclude specific files)
+    - name: Copy source files
+      run: |
+        rsync -av --progress ./ target-repo/lequipe/src/ --exclude=node_modules --exclude=dist --exclude=.git --exclude=.github --exclude=.angular --exclude=target-repo
+
+    # Commit and push changes
+    - name: Commit and push changes
+      run: |
+        cd target-repo
+        if [ -n "$(git status --porcelain)" ]; then
+          git add .
+          git commit -m "${{ env.commit_message }}"
+          git push
+        else
+          echo "No changes to commit."
+        fi
