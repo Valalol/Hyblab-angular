@@ -17,6 +17,11 @@
         width: 100%;
     }
 
+    
+    .selected {
+        background-color: lighten(black, 25%);
+    }
+
     #scenario_images {
         margin-top: 8%;
         display: flex;
