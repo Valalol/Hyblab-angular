@@ -63,5 +63,8 @@ header {
             }
         }
     }
+    .selected {
+        background-color: lighten(black, 25%);
+    }
 }
 
