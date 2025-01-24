@@ -1,7 +1,7 @@
 [
     {
         "title": "En roue libre",
-        "image": "square1.png",
+        "image": "midjourney/velo0.png",
         "situation": {
             "content": [
                 {
@@ -13,6 +13,8 @@
             "choices": [
                 {
                     "text": "Start",
+                    "image": "midjourney/velo1.png",
+                    "position": "45%",
                     "result": {
                         "content": [
                             {
@@ -149,7 +151,7 @@
     },
     {
         "title": "Haut les mains",
-        "image": "square1.png",
+        "image": "square2.png",
         "situation": {
             "content": [
                 {
@@ -189,6 +191,8 @@
                         "choices": [
                             {
                                 "text": "L’arbitre ne siffle pas, le but des anglais est validé",
+                                "image": "midjourney/foot1.png",
+                                "position": "55%",
                                 "result": {
                                     "content": [
                                         {
@@ -303,6 +307,8 @@
                             },
                             {
                                 "text": "L’arbitre siffle la main et invalide le but anglais.",
+                                "image": "midjourney/foot2.png",
+                                "position": "55%",
                                 "result": {
                                     "content": [
                                         {
