@@ -1,7 +1,7 @@
 [
     {
         "title": "En roue libre",
-        "image": "square1.png",
+        "image": "midjourney/velo0.png",
         "situation": {
             "content": [
                 {
@@ -62,7 +62,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Et pendant ce temps, les siestes de papy devant la télé passent à la trappe : sur le Tour Express, chaque virage est une accélération. La Grande Boucle n’a jamais été aussi rapide et les coureurs rejoindront tous les clubs des 27.",
+                                                        "text": "Et pendant ce temps, les siestes de papy devant la télé passent à la trappe : sur le Tour Express, chaque virage est une accélération. La Grande Boucle n’a jamais été aussi rapide et les coureurs rejoindront tous Le club des 27.",
                                                         "template": "full_page"
                                                     }
                                                 ]
@@ -140,12 +140,12 @@
     },
     {
         "title": "Haut les mains",
-        "image": "square1.png",
+        "image": "square2.png",
         "situation": {
             "content": [
                 {
                     "type": "text",
-                    "text": "Tu es un jeune arbitre en formation à la FIFA. Passionné par les règles du jeu et les scandales du foot, tu plonges dans l'histoire de la \"Main de Dieu\", ce but légendaire mais pas très réglo marqué de la main par Diego Maradona contre l’Angleterre en 1986. Mais, imagine : et si ce n’était pas Maradona mais Gary Lineker, l’icône anglaise, qui avait triché ce jour-là ? Si à  la place d’El Pibe de Oro, c’est l’icone anglaise qui avait triché ce jour-là ?  Grâce à un voyage dans le temps, te voilà à Mexico sur le sol du scandale, prêt à voir/découvrir comment ce retournement de situation aurait bouleversé le football mondial. Prépare-toi à arbitrer l’histoire du football… littéralement.",
+                    "text": "Tu es un jeune arbitre en formation à la FIFA. Passionné par les règles du jeu et les scandales du foot, tu plonges dans l'histoire de la \"Main de Dieu\", ce but légendaire mais pas très réglo marqué de la main par Diego Maradona contre l’Angleterre en 1986. Mais, imagine : et si à  la place d’El Pibe de Oro, c’est Gary Lineker, l'icône anglaise qui avait triché ce jour-là ?  Grâce à un voyage dans le temps, te voilà à Mexico sur le sol du scandale, prêt à découvrir comment ce retournement de situation aurait bouleversé le football mondial. Prépare-toi à arbitrer l’histoire du football… littéralement.",
                     "template": "full_page"
                 },
                 {
@@ -172,6 +172,8 @@
             "choices": [
                 {
                     "text": "L’arbitre ne siffle pas, le but des anglais est validé",
+                                "image": "midjourney/foot1.png",
+                                "position": "55%",
                     "result": {
                         "content": [
                             {
@@ -286,6 +288,8 @@
                 },
                 {
                     "text": "L’arbitre siffle la main et invalide le but anglais.",
+                                "image": "midjourney/foot2.png",
+                                "position": "55%",
                     "result": {
                         "content": [
                             {
