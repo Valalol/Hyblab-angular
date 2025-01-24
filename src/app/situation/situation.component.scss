@@ -9,7 +9,7 @@ p {
     border: 1px solid white;
     color: white;
     margin: 10px;
-    padding: 15%;
+    padding: 5%;
     display: flex;
     border-radius: 5px;
     text-align: center;
@@ -22,7 +22,7 @@ p {
     flex-direction: column;
 
     &:hover {
-        background-color: lighten(black, 20%);
+        background-color: lighten(#D61E00, 5%);
     }
 }
 
@@ -32,5 +32,6 @@ p {
 }
 
 .selected {
-    background-color: lighten(black, 25%);
+    background-color: lighten(#D61E00, 5%);
+    border:black;
 }
