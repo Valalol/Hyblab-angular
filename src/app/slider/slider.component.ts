@@ -1,5 +1,5 @@
-import { Component, Inject, Input } from '@angular/core';
-import { Item } from '../models/content-data';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ContentData } from '../models/content-data';
 
 @Component({
   selector: 'app-slider',
@@ -9,20 +9,19 @@ import { Item } from '../models/content-data';
   styleUrl: './slider.component.scss'
 })
 export class SliderComponent {
-  @Input() items!: Item[];
-  selected?: Item;
+  @Input() items?: ContentData[];
+  @Output() selected_output: EventEmitter<ContentData> = new EventEmitter();
+  selected?: ContentData;
 
-  selectItem(item: Item, evt: EventTarget | null): void {
+  selectItem(item: ContentData, evt: EventTarget | null): void {
     this.selected = item;
-    this.scrollToSelectedItem(evt);
+    this.scrollToSelectedItem(evt as Element);
   }
-  scrollToSelectedItem(evt: EventTarget | null): void {
-    // const selectedElement = document.querySelector('.selected');
-    // if (selectedElement) {
-    //   selectedElement.scrollIntoView({ behavior: "smooth",block: 'start', inline: 'center' });
-    // }
-    if (evt) {
-      (evt as Element).scrollIntoView({ behavior: "auto",block: 'start', inline: 'center' });
-      }
+  scrollToSelectedItem(evt: Element): void {
+    evt.scrollIntoView({ behavior: "auto", block: 'end', inline: 'center' });
+  }
+
+  start(item: ContentData) {
+    this.selected_output.emit(item);
   }
 }
