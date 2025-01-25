@@ -18,6 +18,7 @@ export class SituationComponent implements OnChanges, AfterViewInit {
     @Input({ required: true }) situation!: Situation;
     selected_choice?: Choice;
     choice_visible: boolean = false;
+    isTextVisible: boolean = false;
 
     @ViewChild('content') content?: ElementRef;
 
@@ -32,14 +33,15 @@ export class SituationComponent implements OnChanges, AfterViewInit {
         this.content?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest'});
         this.caracterAnimation();
     }
+
+    toggleTextVisibility(): void {
+        this.isTextVisible = !this.isTextVisible;
+    }
+
     caracterAnimation(){
         const targetText = document.querySelectorAll("#animatedText p span");
-        const targetChoice = document.querySelectorAll("#choice_div") ;
 
         const textsToAnimate = Array.from(targetText).filter((el) =>
-            (el as HTMLElement).getAttribute("data-text-visible") !== "true"
-        );
-        const choicesToAnimate = Array.from(targetChoice).filter((el) =>
             (el as HTMLElement).getAttribute("data-text-visible") !== "true"
         );
 
@@ -55,7 +57,10 @@ export class SituationComponent implements OnChanges, AfterViewInit {
             complete: (anim) => {
                 textsToAnimate.forEach((el) => (el as HTMLElement).setAttribute("data-text-visible", "true"));
                 this.choice_visible = true;
+                this.toggleTextVisibility();
             },
         });
+
+        document.querySelectorAll("#animatedText p").forEach((el) => (el as HTMLElement).setAttribute("data-text-visible","true"));
     }
 }
