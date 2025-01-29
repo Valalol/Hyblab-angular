@@ -22,6 +22,7 @@ export type TextBlock = {
     type: "text";
     text: string; // texte du bloc
     template: "full_page" | "quote"; // Format du texte
+    className?: string;
 };
 
 export type QuestionBlock = {

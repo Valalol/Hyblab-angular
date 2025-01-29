@@ -4,10 +4,10 @@
             @switch (item.type) {
                 @case ("text")  {
                     <ng-container *ngIf="!isTextVisible">
-                        <p [innerHTML]="(item.text ? item.text : '') | textAnimation" data-text-visible="false"></p>
+                        <p [innerHTML]="(item.text ? item.text : '') | textAnimation" data-text-visible="false" [class]="item.className"></p>
                     </ng-container>
                     <ng-container *ngIf="isTextVisible">
-                        <p [innerHTML]="(item.text ? item.text : '')" data-text-visible="true"></p>
+                        <p [innerHTML]="(item.text ? item.text : '')" data-text-visible="true" [class]="item.className"></p>
                     </ng-container>
                 }
                 @case ("question") {
